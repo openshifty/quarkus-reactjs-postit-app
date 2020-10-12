@@ -7,17 +7,17 @@ A Cloud ready Post it app composed of
 
 To run this demo:
 1. Fork this repo and modify the following button changing the URL on this README.md file:
-2. Start the workspace: [![Contribute](factory-contribute.svg)](https://codeready-crw.apps.cluster-flblue-4730.flblue-4730.example.opentlc.com/factory?url=https://github.com/pdaverh/quarkus-reactjs-postit-app)
+2. Start the workspace: [![Contribute](factory-contribute.svg)](https://codeready-openshift-workspaces.apps.cluster-f58a.f58a.example.opentlc.com/factory?url=https://github.com/pdaverh/quarkus-reactjs-postit-app)
 
 The URL should use your instance of Che/CodeReady Workspaces:
 
 ```
-https://codeready-crw.apps.cluster-flblue-4730.flblue-4730.example.opentlc.com/factory?url=https://github.com/pdaverh/quarkus-reactjs-postit-app
+https://codeready-openshift-workspaces.apps.cluster-f58a.f58a.example.opentlc.com/factory?url=https://github.com/pdaverh/quarkus-reactjs-postit-app
 ```
 
 Alternatively,
-1. Add your prefered Che or CodeReady Workspaces instance: https://codeready-crw.apps.cluster-flblue-4730.flblue-4730.example.opentlc.com/factory (that would just do the right redirection to the right server based on your preferences)
-2. Start the workspace: [![Contribute](factory-contribute.svg)](https://codeready-crw.apps.cluster-flblue-4730.flblue-4730.example.opentlc.com/factory?url=https://github.com/pdaverh/quarkus-reactjs-postit-app)
+1. Add your prefered Che or CodeReady Workspaces instance: https://codeready-openshift-workspaces.apps.cluster-f58a.f58a.example.opentlc.com/factory (that would just do the right redirection to the right server based on your preferences)
+2. Start the workspace: [![Contribute](factory-contribute.svg)](https://codeready-openshift-workspaces.apps.cluster-f58a.f58a.example.opentlc.com/factory?url=https://github.com/pdaverh/quarkus-reactjs-postit-app)
 
 ![Application topology](topology.png "Application Topology")
 
