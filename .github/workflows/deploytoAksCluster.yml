@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: sspeiche.azurecr.io
+        username: ${{ secrets.acr_sspeiche_username }}
+        password: ${{ secrets.acr_sspeiche_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/dockerfiles" -f  "dockerfiles/Dockerfile-data" -t sspeiche.azurecr.io/sspeiche:${{ github.sha }}
+        docker push sspeiche.azurecr.io/sspeiche:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_sspeiche_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep quarkus_postit | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace quarkus_postit`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: quarkus_postit
+        container-registry-url: sspeiche.azurecr.io
+        container-registry-username: ${{ secrets.acr_sspeiche_username }}
+        container-registry-password: ${{ secrets.acr_sspeiche_password }}
+        secret-name: sspeichedockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: quarkus_postit
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          sspeiche.azurecr.io/sspeiche:${{ github.sha }}
+        imagepullsecrets: |
+          sspeichedockerauth
