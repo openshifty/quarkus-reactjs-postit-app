@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "sspeiche-4828"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "sspeiche-4828"
+  template:
+    metadata:
+      labels:
+        app: "sspeiche-4828"
+    spec:
+      containers:
+        - name: "sspeiche-4828"
+          image: "sspeiche.azurecr.io/sspeiche"
+          ports:
+          - containerPort: 8080
